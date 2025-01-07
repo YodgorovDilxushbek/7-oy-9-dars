@@ -1,42 +1,24 @@
-  import React, { useState } from 'react';
-  import { CssBaseline, Container } from '@mui/material';
-  import TodoApp from './components/Todoapp';
-  import RegistrationForm from './components/RegistrationForm';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from './layout/MainLayout.jsx';
+import Chart from './components/Chart.jsx';
+import Json from './components/Json.jsx';
+import Registration from './components/RegistrationForm.jsx';
+import TodoApp from './components/TodoApp.jsx';
+import './App.css';
 
-  const App = () => {
-    const [activeComponent, setActiveComponent] = useState('TodoApp');
+const App = () => {
+  return (
+      <MainLayout>
+        <Routes>
+        <Route path="/todo" element={<TodoApp />} />
 
-    const handleNavigation = (component) => {
-      setActiveComponent(component);
-    };
+          <Route path="/chart" element={<Chart />} />
+          <Route path="/json" element={<Json />} />
+          <Route path="/registration" element={<Registration />} />
+        </Routes>
+      </MainLayout>
+  );
+};
 
-    return (
-      <>
-        <CssBaseline />
-        <div className="bg-blue-500 p-4">
-          <header className="flex justify-between items-center">
-            <h1 className="text-white text-3xl font-bold">My App</h1>
-            <nav className="space-x-4">
-              <button
-                onClick={() => handleNavigation('TodoApp')}
-                className="text-white hover:text-yellow-300 transition duration-300"
-              >
-                Todo App
-              </button>
-              <button
-                onClick={() => handleNavigation('RegistrationForm')}
-                className="text-white hover:text-yellow-300 transition duration-300"
-              >
-                Registration Form
-              </button>
-            </nav>
-          </header>
-        </div>
-        <Container>
-          {activeComponent === 'TodoApp' ? <TodoApp /> : <RegistrationForm />}
-        </Container>
-      </>
-    );
-  };
-
-  export default App;
+export default App;
